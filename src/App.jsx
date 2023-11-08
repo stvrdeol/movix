@@ -1,27 +1,19 @@
-import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import SearchResults from "./pages/SearchResults";
+import Home from "./pages/home/Home";
 function App() {
-  const options = {
-    method: "GET",
-    url: "https://api.themoviedb.org/3/movie/upcoming",
-    params: { language: "en-US", page: "1" },
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTVhNzMxZWRiMGU0MTI5NzFhNTYxZDE5NTcyMWIwYiIsInN1YiI6IjY1NDk5NzYxOTI0Y2U2MDEzYmI3OThmNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zDzR9rsSuSjWbWOJQwnIfVloAAyPmY2tlH6wPQYc4EY",
-    },
-  };
-
-  axios
-    .request(options)
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
   return (
     <>
-      <h1 className="bg-red-200">hello</h1>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search/:query" element={<SearchResults />} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 }
