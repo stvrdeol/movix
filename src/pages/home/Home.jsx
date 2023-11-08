@@ -2,7 +2,7 @@ import Banner from "./Banner";
 
 function Home() {
   return (
-    <section>
+    <section className="h-screen">
       <Banner />
     </section>
   );
