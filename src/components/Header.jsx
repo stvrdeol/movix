@@ -67,7 +67,7 @@ function Header() {
             )}
           </li>
         </ul>
-        {showMobileMenu && <MobileMenu />}
+        {showMobileMenu && <MobileMenu setShowMobileMenu={setShowMobileMenu} />}
       </nav>
       {showSearchBar && (
         <SearchBar

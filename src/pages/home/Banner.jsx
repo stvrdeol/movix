@@ -24,15 +24,15 @@ function Banner() {
   }, [data]);
   return (
     <section
-      className={`h-4/6 sm:h-full  text-white pt-14 relative flex flex-col items-center justify-center text-center ${
-        loading ? `bg-bgBlue` : `bg-bgBlue/60`
+      className={`h-[80vh] sm:h-screen  text-white pt-14 relative flex flex-col items-center justify-center text-center ${
+        loading ? `bg-bgBlue` : `bg-bgBlue/40`
       }`}>
       {!loading && (
         <>
           <section className="h-full  absolute w-full inset-0 -z-10">
             <LazyLoadImage
               src={bgImg}
-              className="h-full object-cover  w-full sm:h-screen"
+              className="h-full object-cover object-top w-full sm:h-screen"
               effect="blur"
               wrapperProps={{
                 style: { transitionDelay: ".1s" },
@@ -57,13 +57,13 @@ function Banner() {
           />
           <button
             type="submit"
-            className="py-2 px-5  bg-gradient-to-r from-[#F89E00] to-[#DA2F68] rounded-e-full">
+            className="py-2 px-5 sm:px-8 bg-gradient-to-r from-[#F89E00] to-[#DA2F68] rounded-e-full">
             Search
           </button>
         </form>
       </section>
       <section
-        className="h-20 w-full absolute -bottom-4"
+        className="h-20 w-full absolute bottom-0"
         style={{
           background:
             "linear-gradient(180deg,rgba(4,21,45,0) 0%,#04152d 79.17%)",
