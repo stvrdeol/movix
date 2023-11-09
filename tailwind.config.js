@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         bgBlue: "#04152D",
+        pink: "#DA2F68",
       },
     },
   },

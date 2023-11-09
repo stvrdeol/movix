@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../utils/api";
 
-function useFetch(url) {
+function useFetch(url, params) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
+  
   useEffect(() => {
     async function fetch() {
       setLoading(true);
       setData(null);
       setError(null);
       try {
-        const data = await fetchData(url);
+        const data = await fetchData(url, params);
         setData(data);
       } catch (err) {
         setError(err);

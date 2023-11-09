@@ -7,7 +7,7 @@ function Banner() {
   const [query, setQuery] = useState("");
   const [bgImg, setBgImg] = useState(null);
   const navigate = useNavigate();
-  const { data, loading } = useFetch("/movie/popular");
+  const { data, loading } = useFetch("/movie/popular", { page: "2" });
   console.log(data);
 
   function onSubmit(e) {
@@ -25,14 +25,14 @@ function Banner() {
   return (
     <section
       className={`h-4/6 sm:h-full  text-white pt-14 relative flex flex-col items-center justify-center text-center ${
-        loading ? `bg-bgBlue` : `bg-bgBlue/40`
+        loading ? `bg-bgBlue` : `bg-bgBlue/60`
       }`}>
       {!loading && (
         <>
           <section className="h-full  absolute w-full inset-0 -z-10">
             <LazyLoadImage
               src={bgImg}
-              className="h-full object-cover object-center w-full sm:h-screen"
+              className="h-full object-cover  w-full sm:h-screen"
               effect="blur"
               wrapperProps={{
                 style: { transitionDelay: ".1s" },
@@ -41,7 +41,7 @@ function Banner() {
           </section>
         </>
       )}
-      <section className="w-5/6 max-w-md">
+      <section className=" max  w-full max-w-3xl">
         <h1 className="text-5xl font-bold sm:text-7xl ">Welcome</h1>
         <p className="text-xl my-6 font-medium">
           Millions of movies, TV shows and people to discover. Explore now.
@@ -53,11 +53,11 @@ function Banner() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for a movie or tv show..."
             required
-            className="flex-1 py-2 rounded-s-full px-5 outline-none focus:border-2 border-orange-300 text-black"
+            className="flex-1 py-2 rounded-s-full px-5 outline-none text-black"
           />
           <button
             type="submit"
-            className="py-2 px-5 sm:py-4 sm:px-8 bg-gradient-to-r from-[#F89E00] to-[#DA2F68] rounded-e-full">
+            className="py-2 px-5  bg-gradient-to-r from-[#F89E00] to-[#DA2F68] rounded-e-full">
             Search
           </button>
         </form>
