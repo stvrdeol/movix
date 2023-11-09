@@ -43,7 +43,7 @@ function Banner() {
       )}
       <section className=" max  w-full max-w-3xl">
         <h1 className="text-5xl font-bold sm:text-7xl ">Welcome</h1>
-        <p className="text-xl my-6 font-medium">
+        <p className="text-xl mb-6 font-medium">
           Millions of movies, TV shows and people to discover. Explore now.
         </p>
         <form onSubmit={onSubmit} className="flex w-full">
@@ -53,7 +53,7 @@ function Banner() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for a movie or tv show..."
             required
-            className="flex-1 py-2 rounded-s-full px-5 outline-none text-black"
+            className="flex-1 py-2 rounded-s-full px-5 outline-none text-black sm:py-4 sm:px-8"
           />
           <button
             type="submit"
