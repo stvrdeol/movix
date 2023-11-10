@@ -1,15 +1,17 @@
+import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 function Footer() {
   return (
-    <footer>
-      <div>
-        <ul>
-          <li>Terms Of Use</li>
-          <li>Privacy-Policy</li>
-          <li>About</li>
-          <li>Blog</li>
-          <li>FAQ</li>
+    <footer className="bg-[#020C1B] text-white text-center py-14">
+      <div className="max">
+        <ul className="flex gap-3 items-center mx-auto w-max text-sm sm:text-lg">
+          <li className="hover:text-pink cursor-pointer">Terms Of Use</li>
+          <li className="hover:text-pink cursor-pointer">Privacy-Policy</li>
+          <li className="hover:text-pink cursor-pointer">About</li>
+          <li className="hover:text-pink cursor-pointer">Blog</li>
+          <li className="hover:text-pink cursor-pointer">FAQ</li>
         </ul>
-        <div>
+        <div className="text-[#7D828A] text-sm sm:text-base my-8">
           Explore our extensive collection of movies and TV series, from the
           latest blockbusters to timeless classics. Enjoy personalized
           recommendations, in-depth reviews, and engaging community discussions.
@@ -18,6 +20,20 @@ function Footer() {
           we&apos;re here to enhance your streaming experience. Start your
           cinematic journey with us today
         </div>
+        <section className="flex gap-3 w-max mx-auto">
+          <span className="hover:text-pink cursor-pointer text-2xl bg-bgBlue p-4 rounded-full hover:shadow-[0_0_10px_3px] shadow-pink">
+            <FaFacebookF />
+          </span>
+          <span className="hover:text-pink cursor-pointer text-2xl bg-bgBlue p-4 rounded-full hover:shadow-[0_0_10px_3px] shadow-pink">
+            <FaInstagram />
+          </span>
+          <span className="hover:text-pink cursor-pointer text-2xl bg-bgBlue p-4 rounded-full hover:shadow-[0_0_10px_3px] shadow-pink">
+            <FaXTwitter />
+          </span>
+          <span className="hover:text-pink cursor-pointer text-2xl bg-bgBlue p-4 rounded-full hover:shadow-[0_0_10px_3px] shadow-pink">
+            <FaLinkedin />
+          </span>
+        </section>
       </div>
     </footer>
   );
