@@ -8,7 +8,6 @@ function Banner() {
   const [bgImg, setBgImg] = useState(null);
   const navigate = useNavigate();
   const { data, loading } = useFetch("/movie/popular", { page: "2" });
-  console.log(data);
 
   function onSubmit(e) {
     e.preventDefault();
