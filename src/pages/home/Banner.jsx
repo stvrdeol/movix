@@ -7,7 +7,11 @@ function Banner() {
   const [query, setQuery] = useState("");
   const [bgImg, setBgImg] = useState(null);
   const navigate = useNavigate();
-  const { data, loading } = useFetch("/movie/popular", { page: "2" });
+  const randomNum = Math.floor(Math.random() * 100);
+  const { data, loading,  } = useFetch("/movie/popular", {
+    page: randomNum,
+  });
+
 
   function onSubmit(e) {
     e.preventDefault();
@@ -28,10 +32,10 @@ function Banner() {
       }`}>
       {!loading && (
         <>
-          <section className="h-full  absolute w-full inset-0 -z-10">
+          <section className="h-full  absolute w-full inset-0 -z-10 bg-bgBlue">
             <LazyLoadImage
               src={bgImg}
-              className="h-full object-cover object-top w-full sm:h-screen"
+              className="h-full object-cover overflow-clip object-top w-full sm:h-screen"
               effect="blur"
               wrapperProps={{
                 style: { transitionDelay: ".1s" },

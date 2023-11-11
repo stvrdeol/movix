@@ -43,3 +43,13 @@
     background-image: linear-gradient(to top, #F89E00, #DA2F68);
     border-radius: 10px;
 }
+
+
+#carousel::-webkit-scrollbar {
+    display: none;
+}
+
+#carousel {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
