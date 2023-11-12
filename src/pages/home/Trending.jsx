@@ -14,7 +14,7 @@ function Trending() {
         <TabSwitcher data={["Day", "Week"]} />
       </section>
 
-      <CarouselComponent data={data} />
+      <CarouselComponent data={data} loading={loading} error={error} />
     </section>
   );
 }
