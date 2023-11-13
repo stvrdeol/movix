@@ -9,13 +9,21 @@ function Trending() {
   const { data, loading, error } = useFetch(`/trending/all/${trending}`);
 
   return (
-    <section className="py-10 text-white max relative">
+    <section className="py-10 text-white max  relative">
       <section className="flex items-center justify-between">
         <h2 className="text-2xl sm:text-4xl font-bold">Trending</h2>
-        <TabSwitcher data={["Day", "Week"]} setTrending={setTrending} />
+        <TabSwitcher
+          data={["Day", "Week"]}
+          setTab={setTrending}
+          id={"trendingCarousel"}
+        />
       </section>
-
-      <CarouselComponent data={data} loading={loading} error={error} />
+      <CarouselComponent
+        data={data}
+        loading={loading}
+        error={error}
+        id={"trendingCarousel"}
+      />
     </section>
   );
 }

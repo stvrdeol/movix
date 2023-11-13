@@ -1,21 +1,22 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  LazyLoadComponent,
+  LazyLoadImage,
+} from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Skeleton from "./Skeleton";
-function CarouselComponent({ data, loading }) {
-  console.log(loading);
+function CarouselComponent({ data, loading, id }) {
   function scrollRight() {
-    const carousel = document.querySelector("#carousel");
+    const carousel = document.querySelector(`#${id}`);
     carousel.scrollTo({
       left: carousel.scrollLeft + carousel.scrollWidth / 5,
       behavior: "smooth",
     });
   }
   function scrollLeft() {
-    const carousel = document.querySelector("#carousel");
-
+    const carousel = document.querySelector(`#${id}`);
     carousel.scrollTo({
       left: carousel.scrollLeft - carousel.scrollWidth / 5,
       behavior: "smooth",
@@ -33,9 +34,9 @@ function CarouselComponent({ data, loading }) {
   }
   return (
     <section
-      className="overflow-auto w-full scroll-smooth snap-mandatory "
-      id="carousel">
-      <section className="flex h-max gap-2 sm:gap-4 max-w-none my-6 w-max snap-mandatory snap-start relative">
+      className="overflow-auto sm:overflow-hidden  w-full scroll-smooth snap-mandatory "
+      id={id}>
+      <section className="flex h-max gap-2 sm:gap-4 max-w-none mt-6 w-max snap-mandatory snap-start relative">
         {loading ? (
           <>
             <section>
@@ -99,8 +100,8 @@ function CarouselComponent({ data, loading }) {
             return (
               <article
                 key={result.id}
-                className="sm:max-w-[17vw] md:w w-[25vw] snap-start">
-                <section className="relative">
+                className="sm:max-w-[17vw] md:w w-[35vw] snap-start">
+                <section className="relative w-full">
                   <LazyLoadImage
                     src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
                     effect="blur"
@@ -109,22 +110,24 @@ function CarouselComponent({ data, loading }) {
                       style: { transitionDelay: ".1s" },
                     }}
                   />
-                  <section className="w-12  absolute -bottom-6 left-3">
-                    <CircularProgressbar
-                      value={result.vote_average.toFixed(1)}
-                      maxValue={10}
-                      text={result.vote_average.toFixed(1)}
-                      styles={buildStyles({
-                        textSize: "40px",
-                        fontStyle: "bold",
-                        pathColor: `${pathColor(result.vote_average)}`,
-                        textColor: "black",
-                        trailColor: "#d6d6d6",
-                        backgroundColor: "#3e98c7",
-                      })}
-                      className="bg-white rounded-full p-0.5"
-                    />
-                  </section>
+                  <LazyLoadComponent>
+                    <section className="w-12  absolute -bottom-6 left-3">
+                      <CircularProgressbar
+                        value={result.vote_average.toFixed(1)}
+                        maxValue={10}
+                        text={result.vote_average.toFixed(1)}
+                        styles={buildStyles({
+                          textSize: "40px",
+                          fontStyle: "bold",
+                          pathColor: `${pathColor(result.vote_average)}`,
+                          textColor: "black",
+                          trailColor: "#d6d6d6",
+                          backgroundColor: "#3e98c7",
+                        })}
+                        className="bg-white rounded-full p-0.5"
+                      />
+                    </section>
+                  </LazyLoadComponent>
                 </section>
                 <p className="mt-10 font-medium sm:text-lg md:text-xl  truncate">
                   {result.title || result.name || "No Title"}
@@ -140,12 +143,12 @@ function CarouselComponent({ data, loading }) {
       {!loading && (
         <>
           <button
-            className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[35%] left-12 transform -translate-x-1/2 translate-y-1/2 "
+            className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[40%] left-12 transform -translate-x-1/2 translate-y-1/2 "
             onClick={scrollLeft}>
             <AiOutlineArrowLeft />
           </button>
           <button
-            className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[35%] right-2 transform -translate-x-1/2 translate-y-1/2 "
+            className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[40%] right-2 transform -translate-x-1/2 translate-y-1/2 "
             onClick={scrollRight}>
             <AiOutlineArrowRight />
           </button>

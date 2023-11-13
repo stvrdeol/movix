@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-function TabSwitcher({ data, setTrending }) {
+function TabSwitcher({ data, setTab, id }) {
   const [currentTab, setCurrentTab] = useState(data[0]);
   function scrollLeft() {
-    const carousel = document.querySelector("#carousel");
-
+    const carousel = document.querySelector(`#${id}`);
     carousel.scrollTo({
       left: 0,
       behavior: "smooth",
@@ -21,7 +20,15 @@ function TabSwitcher({ data, setTrending }) {
           <span
             onClick={() => {
               setCurrentTab(item);
-              setTrending(item.toLowerCase());
+              setTab(() => {
+                if (item == "TV Shows") {
+                  return "tv";
+                } else if (item == "Movies") {
+                  return "movie";
+                } else {
+                  return item.toLowerCase();
+                }
+              });
               scrollLeft();
             }}
             key={index}
