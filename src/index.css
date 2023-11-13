@@ -53,3 +53,16 @@
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
 }
+
+@keyframes skeletonAnimation {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 90%;
+    }
+}
+
+#animate {
+    animation: skeletonAnimation 1.5s infinite ease-in-out ;
+}

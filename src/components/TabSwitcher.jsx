@@ -1,7 +1,15 @@
 import { useState } from "react";
 
-function TabSwitcher({ data }) {
+function TabSwitcher({ data, setTrending }) {
   const [currentTab, setCurrentTab] = useState(data[0]);
+  function scrollLeft() {
+    const carousel = document.querySelector("#carousel");
+
+    carousel.scrollTo({
+      left: 0,
+      behavior: "smooth",
+    });
+  }
   return (
     <section className="relative  text-black flex items-center bg-white w-min rounded-full border-2 ">
       <section
@@ -11,7 +19,11 @@ function TabSwitcher({ data }) {
       {data.map((item, index) => {
         return (
           <span
-            onClick={() => setCurrentTab(item)}
+            onClick={() => {
+              setCurrentTab(item);
+              setTrending(item.toLowerCase());
+              scrollLeft();
+            }}
             key={index}
             className={`w-24 z-20  ${
               currentTab == item ? `text-white` : null
