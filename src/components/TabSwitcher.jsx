@@ -10,7 +10,7 @@ function TabSwitcher({ data, setTab, id }) {
     });
   }
   return (
-    <section className="relative  text-black flex items-center bg-white w-min rounded-full border-2 ">
+    <section className="relative text-black flex items-center bg-white w-min rounded-full border-2 ">
       <section
         className={`bg-gradient-to-r from-[#F89E00] to-[#DA2F68] w-24 h-8 rounded-full absolute ${
           currentTab == data[0] ? `left-0 ` : `right-0 `

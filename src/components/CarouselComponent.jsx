@@ -1,3 +1,4 @@
+import * as dayjs from "dayjs";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -6,8 +7,20 @@ import {
   LazyLoadImage,
 } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { useSelector } from "react-redux";
 import Skeleton from "./Skeleton";
+
 function CarouselComponent({ data, loading, id }) {
+  const genres = useSelector((state) => state?.home?.genres);
+
+  function showGenres(genreIDs) {
+    const [genre1, genre2] = genreIDs;
+    const genreNames = genres
+      .filter((genre) => genre.id === genre1 || genre.id === genre2)
+      .map((genre) => genre.name);
+    return genreNames;
+  }
+
   function scrollRight() {
     const carousel = document.querySelector(`#${id}`);
     carousel.scrollTo({
@@ -97,20 +110,37 @@ function CarouselComponent({ data, loading, id }) {
           </>
         ) : (
           data?.results.map((result) => {
+            const genres = showGenres(result.genre_ids);
             return (
               <article
                 key={result.id}
                 className="sm:max-w-[17vw] md:w w-[35vw] snap-start">
-                <section className="relative w-full">
-                  <LazyLoadImage
-                    src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
-                    effect="blur"
-                    className="rounded-lg relative h-full max-w-full"
-                    wrapperProps={{
-                      style: { transitionDelay: ".1s" },
-                    }}
-                  />
-                  <LazyLoadComponent>
+                <LazyLoadComponent>
+                  <section className="relative w-full h-max">
+                    <section>
+                      <LazyLoadImage
+                        threshold={250}
+                        src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+                        effect="blur"
+                        className="rounded-lg relative h-full max-w-full"
+                        wrapperProps={{
+                          style: { transitionDelay: ".1s" },
+                        }}
+                      />
+                      <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap  ">
+                        {genres[0] && (
+                          <p className=" p-1 w-max bg-pink rounded-md">
+                            {genres[0]}
+                          </p>
+                        )}
+                        {genres[0] !== genres[1] && genres[1] && (
+                          <p className="p-1 w-max rounded-md  bg-pink">
+                            {genres[1]}
+                          </p>
+                        )}
+                      </section>
+                    </section>
+
                     <section className="w-12  absolute -bottom-6 left-3">
                       <CircularProgressbar
                         value={result.vote_average.toFixed(1)}
@@ -127,14 +157,18 @@ function CarouselComponent({ data, loading, id }) {
                         className="bg-white rounded-full p-0.5"
                       />
                     </section>
-                  </LazyLoadComponent>
-                </section>
-                <p className="mt-10 font-medium sm:text-lg md:text-xl  truncate">
-                  {result.title || result.name || "No Title"}
-                </p>
-                <p className="mt-1 text-[#7B8490]">
-                  {result.release_date || result.first_air_date || "No Info"}
-                </p>
+                  </section>
+                  <p className="mt-10 font-medium sm:text-lg md:text-xl  truncate">
+                    {result.title || result.name || "No Title"}
+                  </p>
+                  <p className="mt-1 text-[#7B8490]">
+                    {(result.release_date &&
+                      dayjs(result.release_date).format("MMM D, YYYY")) ||
+                      (result.first_air_date &&
+                        dayjs(result.first_air_date).format("MMM D, YYYY")) ||
+                      "No Info"}
+                  </p>
+                </LazyLoadComponent>
               </article>
             );
           })

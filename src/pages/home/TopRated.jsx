@@ -13,7 +13,7 @@ function TopRated() {
         <TabSwitcher
           data={["Movies", "TV Shows"]}
           setTab={setTopRated}
-          id={"popularCarousel"}
+          id={"topRatedCarousel"}
         />
       </section>
       <CarouselComponent

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     url: {},
-    genres : {},
+    genres : [],
 };
 
 export const homeSlice = createSlice({
