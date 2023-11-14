@@ -15,7 +15,7 @@ function MobileMenu({ setShowMobileMenu }) {
       </li>
       <li className="py-2 px-4">
         <NavLink
-          to="/tv"
+          to="/tv-shows"
           onClick={() => setShowMobileMenu(false)}
           className={({ isActive }) =>
             isActive ? `font-bold text-pink` : `hover:text-pink hover:font-bold`

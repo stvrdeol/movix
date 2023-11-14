@@ -8,6 +8,7 @@ import {
 } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
 
 function CarouselComponent({ data, loading, id }) {
@@ -112,64 +113,70 @@ function CarouselComponent({ data, loading, id }) {
           data?.results.map((result) => {
             const genres = showGenres(result.genre_ids);
             return (
-              <article
+              <Link
                 key={result.id}
-                className="sm:max-w-[17vw] md:w w-[35vw] snap-start">
-                <LazyLoadComponent>
-                  <section className="relative w-full h-max">
-                    <section>
-                      <LazyLoadImage
-                        threshold={250}
-                        src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
-                        effect="blur"
-                        className="rounded-lg relative h-full max-w-full"
-                        wrapperProps={{
-                          style: { transitionDelay: ".1s" },
-                        }}
-                      />
-                      <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap  ">
-                        {genres[0] && (
-                          <p className=" p-1 w-max bg-pink rounded-md">
-                            {genres[0]}
-                          </p>
-                        )}
-                        {genres[0] !== genres[1] && genres[1] && (
-                          <p className="p-1 w-max rounded-md  bg-pink">
-                            {genres[1]}
-                          </p>
-                        )}
+                to={
+                  result.first_air_date
+                    ? `/details/tv/${result.id}`
+                    : `/details/movie/${result.id}`
+                }>
+                <article className="sm:max-w-[17vw] md:w w-[35vw] snap-start">
+                  <LazyLoadComponent>
+                    <section className="relative w-full h-max">
+                      <section>
+                        <LazyLoadImage
+                          threshold={250}
+                          src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+                          effect="blur"
+                          className="rounded-lg relative h-full max-w-full"
+                          wrapperProps={{
+                            style: { transitionDelay: ".1s" },
+                          }}
+                        />
+                        <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap">
+                          {genres[0] && (
+                            <p className=" p-1 w-max bg-pink rounded-md">
+                              {genres[0]}
+                            </p>
+                          )}
+                          {genres[0] !== genres[1] && genres[1] && (
+                            <p className="p-1 w-max rounded-md  bg-pink">
+                              {genres[1]}
+                            </p>
+                          )}
+                        </section>
+                      </section>
+
+                      <section className="w-12  absolute -bottom-6 left-3">
+                        <CircularProgressbar
+                          value={result.vote_average.toFixed(1)}
+                          maxValue={10}
+                          text={result.vote_average.toFixed(1)}
+                          styles={buildStyles({
+                            textSize: "40px",
+                            fontStyle: "bold",
+                            pathColor: `${pathColor(result.vote_average)}`,
+                            textColor: "black",
+                            trailColor: "#d6d6d6",
+                            backgroundColor: "#3e98c7",
+                          })}
+                          className="bg-white rounded-full p-0.5"
+                        />
                       </section>
                     </section>
-
-                    <section className="w-12  absolute -bottom-6 left-3">
-                      <CircularProgressbar
-                        value={result.vote_average.toFixed(1)}
-                        maxValue={10}
-                        text={result.vote_average.toFixed(1)}
-                        styles={buildStyles({
-                          textSize: "40px",
-                          fontStyle: "bold",
-                          pathColor: `${pathColor(result.vote_average)}`,
-                          textColor: "black",
-                          trailColor: "#d6d6d6",
-                          backgroundColor: "#3e98c7",
-                        })}
-                        className="bg-white rounded-full p-0.5"
-                      />
-                    </section>
-                  </section>
-                  <p className="mt-10 font-medium sm:text-lg md:text-xl  truncate">
-                    {result.title || result.name || "No Title"}
-                  </p>
-                  <p className="mt-1 text-[#7B8490]">
-                    {(result.release_date &&
-                      dayjs(result.release_date).format("MMM D, YYYY")) ||
-                      (result.first_air_date &&
-                        dayjs(result.first_air_date).format("MMM D, YYYY")) ||
-                      "No Info"}
-                  </p>
-                </LazyLoadComponent>
-              </article>
+                    <p className="mt-10 font-medium sm:text-lg md:text-xl  truncate">
+                      {result.title || result.name || "No Title"}
+                    </p>
+                    <p className="mt-1 text-[#7B8490]">
+                      {(result.release_date &&
+                        dayjs(result.release_date).format("MMM D, YYYY")) ||
+                        (result.first_air_date &&
+                          dayjs(result.first_air_date).format("MMM D, YYYY")) ||
+                        "No Info"}
+                    </p>
+                  </LazyLoadComponent>
+                </article>
+              </Link>
             );
           })
         )}

@@ -2,7 +2,7 @@ import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 function Footer() {
   return (
-    <footer className="bg-[#020C1B] text-white text-center py-14">
+    <footer className="bg-[#020C1B] text-white text-center py-14 z-10">
       <div className="max">
         <ul className="flex gap-3 items-center mx-auto w-max text-sm sm:text-lg">
           <li className="hover:text-pink cursor-pointer  transition-all">

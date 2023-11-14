@@ -32,7 +32,7 @@ function Header() {
           </li>
           <li className="hidden sm:block">
             <NavLink
-              to="/tv"
+              to="/tv-shows"
               className={({ isActive }) =>
                 isActive
                   ? `font-bold text-pink`
