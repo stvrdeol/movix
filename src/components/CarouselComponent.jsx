@@ -8,6 +8,17 @@ import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
 
 function CarouselComponent({ data, loading, id }) {
+  function formatDateString(inputDateString) {
+    const date = new Date(inputDateString);
+
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+
+    return formattedDate;
+  }
+
+  formatDateString("2023-08-06");
+
   const genres = useSelector((state) => state?.home?.genres);
 
   function showGenres(genreIDs) {
@@ -115,10 +126,11 @@ function CarouselComponent({ data, loading, id }) {
                   result.first_air_date
                     ? `/details/tv/${result.id}`
                     : `/details/movie/${result.id}`
-                }>
-                <article className="sm:max-w-[17vw] md:w w-[35vw] snap-start">
-                  <section className="relative w-full h-max">
-                    <section>
+                }
+                className="h-full">
+                <article className="sm:max-w-[17vw] md:w w-[35vw] h-full">
+                  <section className="relative w-full h-full">
+                    <section className="h-full">
                       <LazyLoadImage
                         threshold={250}
                         src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
@@ -163,7 +175,9 @@ function CarouselComponent({ data, loading, id }) {
                     {result.title || result.name || "No Title"}
                   </p>
                   <p className="mt-1 text-[#7B8490]">
-                    {result.release_date || result.first_air_date || "No info"}
+                    {result.release_date
+                      ? formatDateString(result.release_date)
+                      : formatDateString(result.first_air_date) || "No info"}
                   </p>
                 </article>
               </Link>
