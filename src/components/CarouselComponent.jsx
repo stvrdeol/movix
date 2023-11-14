@@ -1,4 +1,3 @@
-import * as dayjs from "dayjs";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -168,11 +167,9 @@ function CarouselComponent({ data, loading, id }) {
                       {result.title || result.name || "No Title"}
                     </p>
                     <p className="mt-1 text-[#7B8490]">
-                      {result.release_date
-                        ? dayjs(result.release_date).format("MMM D, YYYY")
-                        : result.first_air_date
-                        ? dayjs(result.first_air_date).format("MMM D, YYYY")
-                        : "No Info"}
+                      {result.release_date ||
+                        result.first_air_date ||
+                        "No info"}
                     </p>
                   </LazyLoadComponent>
                 </article>
