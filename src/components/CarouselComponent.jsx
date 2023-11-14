@@ -168,11 +168,11 @@ function CarouselComponent({ data, loading, id }) {
                       {result.title || result.name || "No Title"}
                     </p>
                     <p className="mt-1 text-[#7B8490]">
-                      {(result.release_date &&
-                        dayjs(result.release_date).format("MMM D, YYYY")) ||
-                        (result.first_air_date &&
-                          dayjs(result.first_air_date).format("MMM D, YYYY")) ||
-                        "No Info"}
+                      {result.release_date
+                        ? dayjs(result.release_date).format("MMM D, YYYY")
+                        : result.first_air_date
+                        ? dayjs(result.first_air_date).format("MMM D, YYYY")
+                        : "No Info"}
                     </p>
                   </LazyLoadComponent>
                 </article>
