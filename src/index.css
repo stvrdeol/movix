@@ -6,6 +6,10 @@
     .max {
         @apply mx-auto sm:max-w-[80vw] px-4
     }
+
+    .result {
+        @apply text-gray-400
+    }
 }
 
 ::-webkit-scrollbar-track {

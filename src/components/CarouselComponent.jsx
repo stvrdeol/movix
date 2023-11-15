@@ -1,13 +1,16 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {
+  LazyLoadImage,
+  trackWindowScroll,
+} from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
 
-function CarouselComponent({ data, loading, id }) {
+function CarouselComponent({ data, loading, id, scrollPosition }) {
   function formatDateString(inputDateString) {
     const date = new Date(inputDateString);
 
@@ -128,7 +131,7 @@ function CarouselComponent({ data, loading, id }) {
                     : `/details/movie/${result.id}`
                 }
                 className="h-full">
-                <article className="sm:max-w-[17vw] md:w w-[35vw] h-full">
+                <article className="sm:max-w-[17vw] md:w w-[35vw]">
                   <section className="relative w-full h-full">
                     <section className="h-full">
                       <LazyLoadImage
@@ -136,6 +139,7 @@ function CarouselComponent({ data, loading, id }) {
                         src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
                         effect="blur"
                         className="rounded-lg relative h-full max-w-full"
+                        scrollPosition={scrollPosition}
                         wrapperProps={{
                           style: { transitionDelay: ".1s" },
                         }}
@@ -203,4 +207,4 @@ function CarouselComponent({ data, loading, id }) {
   );
 }
 
-export default CarouselComponent;
+export default trackWindowScroll(CarouselComponent);
