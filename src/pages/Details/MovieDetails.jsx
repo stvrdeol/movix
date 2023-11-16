@@ -5,7 +5,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Skeleton from "../../components/Skeleton";
 
-function MovieDetails({ data, loading }) {
+function MovieDetails({ data, loading, crew }) {
+  console.log(crew);
   function pathColor(value) {
     if (value >= 7) {
       return `#008000`;
@@ -14,6 +15,19 @@ function MovieDetails({ data, loading }) {
     } else {
       return `red`;
     }
+  }
+
+  function getDirectors() {
+    const filterDirectors = crew?.filter(
+      (crew) => crew.department == "Directing"
+    );
+    const writers = filterDirectors.map((writer) => writer.name).slice(0, 2);
+    return writers.join(",");
+  }
+  function getWriters() {
+    const filterWriters = crew?.filter((crew) => crew.department == "Writing");
+    const writers = filterWriters.map((writer) => writer.name).slice(0, 2);
+    return writers.join(",");
   }
   function formatDateString(inputDateString) {
     const date = new Date(inputDateString);
@@ -70,7 +84,7 @@ function MovieDetails({ data, loading }) {
                 threshold={250}
                 src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
                 effect="blur"
-                className="rounded-xl h-[80vh] mx-auto"
+                className="rounded-xl h-[80vh] object-cover mx-auto"
                 wrapperProps={{
                   style: { transitionDelay: ".1s" },
                 }}
@@ -89,12 +103,12 @@ function MovieDetails({ data, loading }) {
                   {data.tagline}
                 </p>
               </section>
-              <section className="flex gap-2 mt-4">
+              <section className="flex items-center gap-2 mt-4">
                 {data.genres.map((genre) => {
                   return (
                     <p
                       key={genre.id}
-                      className=" p-0.5 px-1 text-sm w-max bg-pink rounded-md">
+                      className=" p-0.5 px-1 text-xs w-max bg-pink rounded-md">
                       {genre.name}
                     </p>
                   );
@@ -127,12 +141,12 @@ function MovieDetails({ data, loading }) {
                 <p className="mt-2">{data.overview}</p>
               </section>
               <section className="mt-8">
-                <section className="flex justify-between">
-                  <article>
+                <section className="flex justify-between sm:justify-start gap-3">
+                  <article className="sm:flex gap-2 items-center">
                     <p className="heading">Status:</p>
                     <p className="result">{data.status}</p>
                   </article>
-                  <article>
+                  <article className="sm:flex gap-2 items-center ">
                     <p className="heading">Release Date:</p>
                     <p className="result">
                       {data.release_date
@@ -140,7 +154,7 @@ function MovieDetails({ data, loading }) {
                         : formatDateString(data.first_air_date)}
                     </p>
                   </article>
-                  <article>
+                  <article className="sm:flex gap-2 items-center">
                     {data.runtime ? (
                       <>
                         <p className="heading">Runtime:</p>
@@ -151,21 +165,21 @@ function MovieDetails({ data, loading }) {
                     ) : (
                       <>
                         <p className="heading">No of seasons:</p>
-                        <p className="result">{data.seasons.length}</p>
+                        <p className="result">{data?.seasons?.length}</p>
                       </>
                     )}
                   </article>
                 </section>
                 <hr className=" h-0.5 w-full my-4" />
                 <section>
-                  <article className="flex gap-2">
+                  <article className="flex items-center gap-2">
                     <p className="heading">Director:</p>
-                    <p className="result">{data.status}</p>
+                    <p className="result">{getDirectors()}</p>
                   </article>
                   <hr className=" h-0.5 w-full my-4" />
-                  <article className="flex gap-2">
+                  <article className="flex items-center gap-2">
                     <p className="heading">Writer:</p>
-                    <p className="result">{data.status}</p>
+                    <p className="result">{getWriters()}</p>
                   </article>
                   <hr className=" h-0.5 w-full my-4" />
                 </section>

@@ -10,6 +10,9 @@
     .result {
         @apply text-gray-400
     }
+    .heading {
+        @apply font-bold sm:text-lg
+    }
 }
 
 ::-webkit-scrollbar-track {
@@ -51,13 +54,15 @@
 
 #topRatedCarousel::-webkit-scrollbar,
 #popularCarousel::-webkit-scrollbar,
-#trendingCarousel::-webkit-scrollbar {
+#trendingCarousel::-webkit-scrollbar,
+.cast::-webkit-scrollbar {
     display: none;
 }
 
 #topRatedCarousel,
 #popularCarousel,
-#trendingCarousel {
+#trendingCarousel,
+.cast {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
 }

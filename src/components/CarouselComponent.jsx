@@ -131,20 +131,20 @@ function CarouselComponent({ data, loading, id, scrollPosition }) {
                     : `/details/movie/${result.id}`
                 }
                 className="h-full">
-                <article className="sm:max-w-[17vw] md:w w-[35vw]">
+                <article className="md:max-w-[17vw] sm:w-[20vw] w-[35vw]">
                   <section className="relative w-full h-full">
                     <section className="h-full">
                       <LazyLoadImage
                         threshold={250}
                         src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
                         effect="blur"
-                        className="rounded-lg relative h-full max-w-full"
+                        className="rounded-lg relative  h-full  "
                         scrollPosition={scrollPosition}
                         wrapperProps={{
                           style: { transitionDelay: ".1s" },
                         }}
                       />
-                      <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap">
+                      <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-min justify-end flex-wrap">
                         {genres[0] && (
                           <p className=" p-1 w-max bg-pink rounded-md">
                             {genres[0]}
