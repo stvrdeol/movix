@@ -194,7 +194,7 @@ function Carousel({ loading, data, id }) {
         </button>
         <button
           onClick={scrollRight}
-          className="sm:block hidden bg-black/50 p-2 rounded-full text-2xl absolute top-[40%] right-2 transform -translate-x-1/2 translate-y-1/2">
+          className="sm:block hidden bg-black/50 p-2 rounded-full text-2xl absolute top-[40%] right-3 transform -translate-x-1/2 translate-y-1/2">
           <AiOutlineArrowRight />
         </button>
       </section>
