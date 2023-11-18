@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CarouselComponent from "../../components/CarouselComponent";
+import Carousel from "../../components/Carousel";
 import TabSwitcher from "../../components/TabSwitcher";
 import useFetch from "../../hooks/useFetch";
 
@@ -16,7 +16,8 @@ function TopRated() {
           id={"topRatedCarousel"}
         />
       </section>
-      <CarouselComponent
+
+      <Carousel
         data={data}
         loading={loading}
         error={error}

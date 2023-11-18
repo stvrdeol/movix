@@ -1,7 +1,8 @@
 import { useState } from "react";
-import CarouselComponent from "../../components/CarouselComponent";
+// import CarouselComponent from "../../components/CarouselComponent";
 import TabSwitcher from "../../components/TabSwitcher";
 import useFetch from "../../hooks/useFetch";
+import Carousel from "../../components/Carousel";
 
 function Trending() {
   // const imageURL = "https://image.tmdb.org/t/p/w500";
@@ -18,7 +19,13 @@ function Trending() {
           id={"trendingCarousel"}
         />
       </section>
-      <CarouselComponent
+      {/* <CarouselComponent
+        data={data}
+        loading={loading}
+        error={error}
+        id={"trendingCarousel"}
+      /> */}
+      <Carousel
         data={data}
         loading={loading}
         error={error}

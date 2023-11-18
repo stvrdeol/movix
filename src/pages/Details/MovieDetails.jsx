@@ -21,12 +21,12 @@ function MovieDetails({ data, loading, crew }) {
     const filterDirectors = crew?.filter(
       (crew) => crew.department == "Directing"
     );
-    const writers = filterDirectors.map((writer) => writer.name).slice(0, 2);
+    const writers = filterDirectors?.map((writer) => writer.name).slice(0, 2);
     return writers.join(",");
   }
   function getWriters() {
     const filterWriters = crew?.filter((crew) => crew.department == "Writing");
-    const writers = filterWriters.map((writer) => writer.name).slice(0, 2);
+    const writers = filterWriters?.map((writer) => writer.name).slice(0, 2);
     return writers.join(",");
   }
   function formatDateString(inputDateString) {

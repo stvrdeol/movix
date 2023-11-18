@@ -10,6 +10,7 @@
     .result {
         @apply text-gray-400
     }
+
     .heading {
         @apply font-bold sm:text-lg
     }
