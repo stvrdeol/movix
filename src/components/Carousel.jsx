@@ -55,7 +55,7 @@ function Carousel({ loading, data, id }) {
   return (
     <>
       <section
-        className="overflow-hidden w-full max-w-none gap-[1%] flex mt-5"
+        className="sm:overflow-hidden overflow-auto w-full max-w-none gap-[1%] flex mt-5"
         id={id}>
         {loading && (
           <>
