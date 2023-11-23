@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
 
 function Carousel({ loading, data, id }) {
-  console.log(data);
   function scrollRight() {
     const carousel = document.querySelector(`#${id}`);
     carousel.scrollTo({

@@ -6,7 +6,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import Skeleton from "../../components/Skeleton";
 
 function MovieDetails({ data, loading, crew }) {
-  console.log(crew);
+  console.log(data);
   function pathColor(value) {
     if (value >= 7) {
       return `#008000`;
@@ -21,13 +21,13 @@ function MovieDetails({ data, loading, crew }) {
     const filterDirectors = crew?.filter(
       (crew) => crew.department == "Directing"
     );
-    const writers = filterDirectors?.map((writer) => writer.name).slice(0, 2);
-    return writers.join(",");
+    const directors = filterDirectors?.map((writer) => writer.name).slice(0, 2);
+    return directors?.join(",") || "N/A";
   }
   function getWriters() {
     const filterWriters = crew?.filter((crew) => crew.department == "Writing");
     const writers = filterWriters?.map((writer) => writer.name).slice(0, 2);
-    return writers.join(",");
+    return writers?.join(",") || "N/A";
   }
   function formatDateString(inputDateString) {
     const date = new Date(inputDateString);
@@ -50,8 +50,12 @@ function MovieDetails({ data, loading, crew }) {
     <>
       {loading && (
         <section className="space-y-2 sm:flex gap-4">
-          <Skeleton classNames={`rounded-lg h-[60vh] flex-1`} />
-          <section className="space-y-2 flex-1">
+          <section
+            className="h-[70vh] flex-none mb-8 mx-auto"
+            style={{ aspectRatio: "1/1.5" }}>
+            <Skeleton classNames={`rounded-lg h-full w-full`} />
+          </section>
+          <section className="space-y-2  flex-1">
             <Skeleton classNames={`rounded-lg h-4 `} />
             <section className="flex gap-3 ">
               <Skeleton classNames={`rounded-lg h-4 w-20`} />
@@ -93,11 +97,7 @@ function MovieDetails({ data, loading, crew }) {
             <section className="flex-1">
               <section className="mt-5 sm:mt-0">
                 <p className="text-2xl sm:text-4xl font-semibold">
-                  {data.title || data.name} (
-                  {data.release_date
-                    ? formatDateString(data.release_date).slice(-4)
-                    : formatDateString(data.first_air_date).slice(-4)}
-                  )
+                  {data.title} ({formatDateString(data.release_date).slice(-4)})
                 </p>
                 <p className="italic sm:text-lg  text-[#7B8490]">
                   {data.tagline}
@@ -149,25 +149,14 @@ function MovieDetails({ data, loading, crew }) {
                   <article className="sm:flex gap-2 items-center ">
                     <p className="heading">Release Date:</p>
                     <p className="result">
-                      {data.release_date
-                        ? formatDateString(data.release_date)
-                        : formatDateString(data.first_air_date)}
+                      {formatDateString(data.release_date)}
                     </p>
                   </article>
                   <article className="sm:flex gap-2 items-center">
-                    {data.runtime ? (
-                      <>
-                        <p className="heading">Runtime:</p>
-                        <p className="result">
-                          {convertToHoursAndMinutes(data.runtime)}
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <p className="heading">No of seasons:</p>
-                        <p className="result">{data?.seasons?.length}</p>
-                      </>
-                    )}
+                    <p className="heading">Runtime:</p>
+                    <p className="result">
+                      {convertToHoursAndMinutes(data.runtime) || "N/A"}
+                    </p>
                   </article>
                 </section>
                 <hr className=" h-0.5 w-full my-4" />
@@ -183,6 +172,27 @@ function MovieDetails({ data, loading, crew }) {
                   </article>
                   <hr className=" h-0.5 w-full my-4" />
                 </section>
+                <section className="flex justify-between sm:justify-start  gap-3">
+                  <article className="sm:flex gap-2 items-center">
+                    <p className="heading">Budget:</p>
+                    <p className="result">
+                      ${data.budget.toLocaleString() || "N/A"}
+                    </p>
+                  </article>
+                  <article className="sm:flex gap-2 items-center ">
+                    <p className="heading">Revenue:</p>
+                    <p className="result">
+                      ${data.revenue.toLocaleString() || "N/A"}
+                    </p>
+                  </article>
+                  <article className="sm:flex gap-2 items-center ">
+                    <p className="heading">Profit:</p>
+                    <p className="result">
+                      ${(data.revenue - data.budget).toLocaleString() || "N/A"}
+                    </p>
+                  </article>
+                </section>
+                <hr className=" h-0.5 w-full my-4" />
               </section>
             </section>
           </article>
