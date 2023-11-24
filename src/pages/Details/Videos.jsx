@@ -1,7 +1,6 @@
 import ReactPlayer from "react-player";
 
 function Videos({ videos, videosLoading: loading }) {
-  console.log(videos);
   return (
     <div>
       <ReactPlayer

@@ -7,7 +7,6 @@ import SearchResults from "./pages/SearchResults";
 import Home from "./pages/home/Home";
 function App() {
   const { pathname } = useLocation();
-  console.log(location);
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -21,7 +20,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search/:query" element={<SearchResults />} />
-          <Route path="/details/:mediaType/:id" element={<Details />} />
+          <Route
+            path="/details/:mediaType/:id"
+            element={<Details />}
+            errorElement={<Home />}
+          />
         </Routes>
       </main>
       <Footer />

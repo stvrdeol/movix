@@ -1,6 +1,5 @@
 import Carousel from "../../components/Carousel";
 function Similar({ data, loading }) {
-  console.log(data);
   return (
     data?.results.length > 1 && (
       <section className="relative my-10">

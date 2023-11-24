@@ -46,6 +46,7 @@ function Carousel({ loading, data, id }) {
   const genres = useSelector((state) => state?.home?.genres);
 
   function showGenres(genreIDs) {
+    if (!Array.isArray(genreIDs)) return null;
     const [genre1, genre2] = genreIDs;
     const genreNames = genres
       .filter((genre) => genre.id === genre1 || genre.id === genre2)
@@ -122,7 +123,8 @@ function Carousel({ loading, data, id }) {
             if (index == 20) {
               return;
             }
-            const genres = showGenres(result.genre_ids);
+
+            const genres = showGenres(result?.genre_ids);
             return (
               <article
                 key={result.id}
@@ -130,17 +132,17 @@ function Carousel({ loading, data, id }) {
                 <Link
                   to={
                     result.first_air_date
-                      ? `/details/tv/${result.id}`
-                      : `/details/movie/${result.id}`
+                      ? `/details/tv/${result?.id}`
+                      : `/details/movie/${result?.id}`
                   }
                   className="h-full w-full">
                   <section className="relative">
                     <LazyLoadImage
                       threshold={250}
                       src={
-                        result.poster_path ? 
-                        `https://image.tmdb.org/t/p/original${result.poster_path}` :
-                        NoPoster
+                        result.poster_path
+                          ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                          : NoPoster
                       }
                       effect="blur"
                       className="rounded-lg w-full"
@@ -149,23 +151,27 @@ function Carousel({ loading, data, id }) {
                       }}
                       style={{ aspectRatio: "1/1.5" }}
                     />
-                    <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap">
-                      {genres[0] && (
-                        <p className=" p-1 w-max bg-pink rounded-md">
-                          {genres[0]}
-                        </p>
-                      )}
-                      {genres[0] !== genres[1] && genres[1] && (
-                        <p className="p-1 w-max rounded-md  bg-pink">
-                          {genres[1]}
-                        </p>
-                      )}
-                    </section>
+                    {genres && (
+                      <>
+                        <section className="hidden absolute text-xs md:flex gap-2 bottom-2 right-1 w-1/2 justify-end flex-wrap">
+                          {genres[0] && (
+                            <p className=" p-1 w-max bg-pink rounded-md">
+                              {genres[0]}
+                            </p>
+                          )}
+                          {genres[0] !== genres[1] && genres[1] && (
+                            <p className="p-1 w-max rounded-md  bg-pink">
+                              {genres[1]}
+                            </p>
+                          )}
+                        </section>
+                      </>
+                    )}
                     <section className="w-12  absolute -bottom-6 left-3">
                       <CircularProgressbar
-                        value={result.vote_average.toFixed(1)}
+                        value={result.vote_average?.toFixed(1)}
                         maxValue={10}
-                        text={result.vote_average.toFixed(1)}
+                        text={result.vote_average?.toFixed(1)}
                         styles={buildStyles({
                           textSize: "40px",
                           fontStyle: "bold",
@@ -184,8 +190,8 @@ function Carousel({ loading, data, id }) {
                     </p>
                     <p className="mt-1 text-[#7B8490]">
                       {result.release_date
-                        ? formatDateString(result.release_date)
-                        : formatDateString(result.first_air_date) || "No info"}
+                        ? formatDateString(result?.release_date)
+                        : formatDateString(result?.first_air_date) || "No info"}
                     </p>
                   </section>
                 </Link>

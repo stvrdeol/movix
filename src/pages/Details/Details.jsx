@@ -1,11 +1,14 @@
+import { useState } from "react";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useParams } from "react-router-dom";
+import VideoPopUp from "../../components/VideoPopUp";
 import useFetch from "../../hooks/useFetch";
 import Cast from "./Cast";
 import MovieDetails from "./MovieDetails";
 import Recommendations from "./Recommendations";
 import SeriesDetails from "./SeriesDetails";
 import Similar from "./Similar";
+import Videos from "./Videos";
 export default function Details() {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -18,9 +21,11 @@ export default function Details() {
   const { data: recommendData, loading: recommendLoading } = useFetch(
     `/${mediaType}/${id}/recommendations`
   );
-  // const { data: videos, loading: videosLoading } = useFetch(
-  //   `/${mediaType}/${id}/videos`
-  // );
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoId, setVideoId] = useState(null);
+  const { data: videos, loading: videosLoading } = useFetch(
+    `/${mediaType}/${id}/videos`
+  );
 
   return (
     <section
@@ -36,14 +41,35 @@ export default function Details() {
           />
         </section>
         {mediaType == "tv" ? (
-          <SeriesDetails data={data} loading={loading} crew={cast?.crew} />
+          <SeriesDetails
+            data={data}
+            loading={loading}
+            crew={cast?.crew}
+            setShowVideo={setShowVideo}
+            setVideoId={setVideoId}
+            videos={videos}
+          />
         ) : (
-          <MovieDetails data={data} loading={loading} crew={cast?.crew} />
+          <MovieDetails
+            data={data}
+            loading={loading}
+            crew={cast?.crew}
+            setShowVideo={setShowVideo}
+            setVideoId={setVideoId}
+            videos={videos}
+          />
         )}
         <Cast cast={cast} castLoading={castLoading} />
-        {/* <Videos videos={videos} videosLoading={videosLoading} />s */}
+        <Videos
+          videos={videos}
+          videosLoading={videosLoading}
+          setVideoId={setVideoId}
+        />
         <Similar data={similarData} loading={similarLoading} />
         <Recommendations data={recommendData} loading={recommendLoading} />
+        {showVideo && (
+          <VideoPopUp setShowVideo={setShowVideo} videoId={videoId} />
+        )}
       </section>
     </section>
   );

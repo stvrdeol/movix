@@ -3,9 +3,16 @@ import "react-circular-progressbar/dist/styles.css";
 import { FaRegPlayCircle } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import NoPoster from "../../assets/no-poster.png";
 import Skeleton from "../../components/Skeleton";
-import NoPoster from "../../assets/no-poster.png"
-function MovieDetails({ data, loading, crew }) {
+function MovieDetails({
+  data,
+  loading,
+  crew,
+  setShowVideo,
+  setVideoId,
+  videos,
+}) {
   function pathColor(value) {
     if (value >= 7) {
       return `#008000`;
@@ -15,16 +22,18 @@ function MovieDetails({ data, loading, crew }) {
       return `red`;
     }
   }
-
+  const trailer = videos?.results?.filter((video) => video.type == "Trailer") || "error";
+  console.log(trailer)
   function getDirectors() {
-    const filterDirectors = crew?.filter(
-      (crew) => crew.department == "Directing"
-    );
+    const filterDirectors = crew?.filter((crew) => crew.job == "Director");
     const directors = filterDirectors?.map((writer) => writer.name).slice(0, 2);
     return directors?.join(",") || "N/A";
   }
   function getWriters() {
-    const filterWriters = crew?.filter((crew) => crew.department == "Writing");
+    const filterWriters = crew?.filter(
+      (crew) =>
+        crew.job == "Screenplay" || crew.job == "Story" || crew.job == "Writer"
+    );
     const writers = filterWriters?.map((writer) => writer.name).slice(0, 2);
     return writers?.join(",") || "N/A";
   }
@@ -85,7 +94,11 @@ function MovieDetails({ data, loading, crew }) {
             <section className="">
               <LazyLoadImage
                 threshold={250}
-                src={data.poster_path ?  `https://image.tmdb.org/t/p/original${data.poster_path}` : NoPoster}
+                src={
+                  data.poster_path
+                    ? `https://image.tmdb.org/t/p/original${data.poster_path}`
+                    : NoPoster
+                }
                 effect="blur"
                 className="rounded-xl h-[80vh] object-cover mx-auto"
                 wrapperProps={{
@@ -130,7 +143,10 @@ function MovieDetails({ data, loading, crew }) {
                 />
                 <section
                   className="flex items-center gap-2 hover:text-pink cursor-pointer transition-all duration-1000"
-                  onClick={() => alert("hi")}>
+                  onClick={() => {
+                    setShowVideo(true);
+                    setVideoId(trailer[0]?.key);
+                  }}>
                   <FaRegPlayCircle className="text-6xl sm:text-[5rem]  " />
                   <span className="text-xl">Watch Trailer</span>
                 </section>
