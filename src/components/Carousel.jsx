@@ -5,6 +5,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import NoPoster from "../assets/no-poster.png";
 import Skeleton from "./Skeleton";
 
 function Carousel({ loading, data, id }) {
@@ -54,7 +55,7 @@ function Carousel({ loading, data, id }) {
   return (
     <>
       <section
-        className="sm:overflow-hidden overflow-auto w-full max-w-none gap-[1%] flex mt-5"
+        className="sm:overflow-hidden overflow-auto w-full max-w-none gap-[1%] flex carousel  mt-5"
         id={id}>
         {loading && (
           <>
@@ -117,7 +118,10 @@ function Carousel({ loading, data, id }) {
           </>
         )}
         {data &&
-          data?.results?.map((result) => {
+          data?.results?.map((result, index) => {
+            if (index == 20) {
+              return;
+            }
             const genres = showGenres(result.genre_ids);
             return (
               <article
@@ -133,7 +137,11 @@ function Carousel({ loading, data, id }) {
                   <section className="relative">
                     <LazyLoadImage
                       threshold={250}
-                      src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+                      src={
+                        result.poster_path ? 
+                        `https://image.tmdb.org/t/p/original${result.poster_path}` :
+                        NoPoster
+                      }
                       effect="blur"
                       className="rounded-lg w-full"
                       wrapperProps={{
@@ -188,12 +196,12 @@ function Carousel({ loading, data, id }) {
       <section className="flex justify-between">
         <button
           onClick={scrollLeft}
-          className="sm:block hidden bg-black/50 p-2 rounded-full text-2xl absolute top-[40%] left-12 transform -translate-x-1/2 translate-y-1/2">
+          className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[40%] left-12 transform -translate-x-1/2 translate-y-1/2">
           <AiOutlineArrowLeft />
         </button>
         <button
           onClick={scrollRight}
-          className="sm:block hidden bg-black/50 p-2 rounded-full text-2xl absolute top-[40%] right-3 transform -translate-x-1/2 translate-y-1/2">
+          className="sm:block hidden bg-black/70 p-2 rounded-full text-2xl absolute top-[40%] right-3 transform -translate-x-1/2 translate-y-1/2">
           <AiOutlineArrowRight />
         </button>
       </section>

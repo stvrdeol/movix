@@ -4,9 +4,9 @@ import { FaRegPlayCircle } from "react-icons/fa";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Skeleton from "../../components/Skeleton";
+import NoPoster from "../../assets/no-poster.png";
 
 function SeriesDetails({ data, loading, crew }) {
-  console.log(data);
   function pathColor(value) {
     if (value >= 7) {
       return `#008000`;
@@ -70,7 +70,7 @@ function SeriesDetails({ data, loading, crew }) {
             style={{ aspectRatio: "1/1.5" }}>
             <LazyLoadImage
               threshold={250}
-              src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
+              src={data.poster_path ?  `https://image.tmdb.org/t/p/original${data.poster_path}` : NoPoster}
               effect="blur"
               className="rounded-xl object-cover"
               wrapperProps={{

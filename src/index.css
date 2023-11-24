@@ -53,16 +53,12 @@
 }
 
 
-#topRatedCarousel::-webkit-scrollbar,
-#popularCarousel::-webkit-scrollbar,
-#trendingCarousel::-webkit-scrollbar,
+.carousel::-webkit-scrollbar,
 .cast::-webkit-scrollbar {
     display: none;
 }
 
-#topRatedCarousel,
-#popularCarousel,
-#trendingCarousel,
+.carousel,
 .cast {
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
