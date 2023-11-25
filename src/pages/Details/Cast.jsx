@@ -6,47 +6,50 @@ import Skeleton from "../../components/Skeleton";
 function Cast({ cast, castLoading }) {
   return (
     <section className="my-10">
-      <h2 className="text-2xl">Top Cast</h2>
+      {cast && <h2 className="text-2xl">Top Cast</h2>}
       {castLoading && (
-        <section className="mt-4 flex gap-6 overflow-hidden">
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-          <article className="space-y-2">
-            <Skeleton classNames={`w-40 h-40 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-            <Skeleton classNames={`w-40 h-2 rounded-full`} />
-          </article>
-        </section>
+        <>
+          <h2 className="text-2xl">Top Cast</h2>
+          <section className="mt-4 flex gap-6 overflow-hidden">
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+            <article className="space-y-2">
+              <Skeleton classNames={`w-40 h-40 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+              <Skeleton classNames={`w-40 h-2 rounded-full`} />
+            </article>
+          </section>
+        </>
       )}
-      {!castLoading && cast && (
+      {!castLoading && cast?.cast?.length > 0 && (
         <section className="cast overflow-auto scroll-smooth">
           <section className="flex mt-5 gap-4 w-max">
             {cast.cast.map((actor) => {

@@ -64,6 +64,7 @@ export default function Details() {
           videos={videos}
           videosLoading={videosLoading}
           setVideoId={setVideoId}
+          setShowVideo={setShowVideo}
         />
         <Similar data={similarData} loading={similarLoading} />
         <Recommendations data={recommendData} loading={recommendLoading} />

@@ -22,8 +22,8 @@ function MovieDetails({
       return `red`;
     }
   }
-  const trailer = videos?.results?.filter((video) => video.type == "Trailer") || "error";
-  console.log(trailer)
+  const trailer =
+    videos?.results?.filter((video) => video.type == "Trailer") || "error";
   function getDirectors() {
     const filterDirectors = crew?.filter((crew) => crew.job == "Director");
     const directors = filterDirectors?.map((writer) => writer.name).slice(0, 2);
@@ -141,15 +141,17 @@ function MovieDetails({
                   })}
                   className=" w-16 sm:w-20 rounded-full "
                 />
-                <section
-                  className="flex items-center gap-2 hover:text-pink cursor-pointer transition-all duration-1000"
-                  onClick={() => {
-                    setShowVideo(true);
-                    setVideoId(trailer[0]?.key);
-                  }}>
-                  <FaRegPlayCircle className="text-6xl sm:text-[5rem]  " />
-                  <span className="text-xl">Watch Trailer</span>
-                </section>
+                {trailer?.length > 0 && (
+                  <section
+                    className="flex items-center gap-2 hover:text-pink cursor-pointer transition-all duration-1000"
+                    onClick={() => {
+                      setShowVideo(true);
+                      setVideoId(trailer[0]?.key);
+                    }}>
+                    <FaRegPlayCircle className="text-6xl sm:text-[5rem]  " />
+                    <span className="text-xl">Watch Trailer</span>
+                  </section>
+                )}
               </section>
               <section>
                 <h2 className="text-2xl font-semibold sm:text-3xl">OverView</h2>
