@@ -49,7 +49,7 @@ function SeriesDetails({
   return (
     <>
       {loading && (
-        <section className="space-y-2 sm:flex gap-4">
+        <section className="space-y-2 md:flex gap-4">
           <section
             className="h-[70vh] flex-none mb-8 mx-auto"
             style={{ aspectRatio: "1/1.5" }}>
@@ -73,9 +73,9 @@ function SeriesDetails({
         </section>
       )}
       {data && !loading && (
-        <section className="space-y-2 sm:flex gap-6 sm:gap-10">
+        <section className="space-y-2 md:flex gap-6">
           <section
-            className="h-[70vh] flex-none mb-8 sm:mb-0 mx-auto"
+            className="h-[70vh] flex-none mb-8 md:mb-0 mx-auto"
             style={{ aspectRatio: "1/1.5" }}>
             <LazyLoadImage
               threshold={250}
@@ -92,15 +92,15 @@ function SeriesDetails({
             />
           </section>
           <section className="flex-1">
-            <section className="mt-5 sm:mt-0">
-              <p className="text-2xl sm:text-4xl font-semibold">
+            <section className="mt-5 md:mt-0">
+              <p className="text-2xl md:text-4xl font-semibold">
                 {data.name} ({formatDateString(data.first_air_date).slice(-4)})
               </p>
-              <p className="italic sm:text-lg  text-[#7B8490]">
+              <p className="italic md:text-lg  text-[#7B8490]">
                 {data.tagline || "No tagline available"}
               </p>
             </section>
-            <section className="flex items-center gap-2 mt-4">
+            <section className="flex items-center flex-wrap gap-2 mt-4">
               {data.genres.map((genre) => {
                 return (
                   <p
@@ -124,7 +124,7 @@ function SeriesDetails({
                   trailColor: "#041226",
                   backgroundColor: "#041226",
                 })}
-                className=" w-16 sm:w-20 rounded-full "
+                className=" w-16 md:w-20 rounded-full "
               />
               {trailer?.length > 0 && (
                 <section
@@ -133,28 +133,28 @@ function SeriesDetails({
                     setShowVideo(true);
                     setVideoId(trailer[0]?.key);
                   }}>
-                  <FaRegPlayCircle className="text-6xl sm:text-[5rem]  " />
+                  <FaRegPlayCircle className="text-6xl md:text-[5rem]  " />
                   <span className="text-xl">Watch Trailer</span>
                 </section>
               )}
             </section>
             <section>
-              <h2 className="text-2xl font-semibold sm:text-3xl">OverView</h2>
+              <h2 className="text-2xl font-semibold md:text-3xl">OverView</h2>
               <p className="mt-2">{data.overview}</p>
             </section>
             <section className="mt-8">
-              <section className="flex justify-between sm:justify-start gap-3">
-                <article className="sm:flex gap-2 items-center">
+              <section className="flex justify-between gap-3">
+                <article>
                   <p className="heading">Status:</p>
                   <p className="result">{data.status}</p>
                 </article>
-                <article className="sm:flex gap-2 items-center ">
+                <article>
                   <p className="heading">First Air Date:</p>
                   <p className="result">
                     {formatDateString(data.first_air_date) || "No info"}
                   </p>
                 </article>
-                <article className="sm:flex gap-2 items-center">
+                <article>
                   <p className="heading">No of seasons:</p>
                   <p className="result">{data?.seasons?.length || 1}</p>
                 </article>

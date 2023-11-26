@@ -57,7 +57,7 @@ function MovieDetails({
   return (
     <>
       {loading && (
-        <section className="space-y-2 sm:flex gap-4">
+        <section className="space-y-2 md:flex gap-4">
           <section
             className="h-[70vh] flex-none mb-8 mx-auto"
             style={{ aspectRatio: "1/1.5" }}>
@@ -83,15 +83,10 @@ function MovieDetails({
 
       {!loading && data && (
         <section className="">
-          <section className="fixed inset-0 bg-bgBlue -z-10">
-            <img
-              src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-              alt={data.title}
-              className=" h-[100vh] w-full object-cover opacity-10"
-            />
-          </section>
-          <article className="sm:flex items-start gap-5">
-            <section className="">
+          <article className="space-y-2 md:flex gap-6">
+            <section
+              className="h-[70vh] flex-none mb-8 md:mb-0 mx-auto"
+              style={{ aspectRatio: "1/1.5" }}>
               <LazyLoadImage
                 threshold={250}
                 src={
@@ -100,27 +95,27 @@ function MovieDetails({
                     : NoPoster
                 }
                 effect="blur"
-                className="rounded-xl h-[80vh] object-cover mx-auto"
+                className="rounded-xl object-cover"
                 wrapperProps={{
                   style: { transitionDelay: ".1s" },
                 }}
               />
             </section>
             <section className="flex-1">
-              <section className="mt-5 sm:mt-0">
-                <p className="text-2xl sm:text-4xl font-semibold">
+              <section className="mt-5 md:mt-0">
+                <p className="text-2xl md:text-4xl font-semibold">
                   {data.title} ({formatDateString(data.release_date).slice(-4)})
                 </p>
-                <p className="italic sm:text-lg  text-[#7B8490]">
+                <p className="italic md:text-lg  text-[#7B8490]">
                   {data.tagline}
                 </p>
               </section>
-              <section className="flex items-center gap-2 mt-4">
+              <section className="flex items-center flex-wrap gap-2 mt-4">
                 {data.genres.map((genre) => {
                   return (
                     <p
                       key={genre.id}
-                      className=" p-0.5 px-1 text-xs w-max bg-pink rounded-md">
+                      className=" p-0.5 px-1 text-xs w-max  bg-pink rounded-md">
                       {genre.name}
                     </p>
                   );
@@ -139,7 +134,7 @@ function MovieDetails({
                     trailColor: "#041226",
                     backgroundColor: "#041226",
                   })}
-                  className=" w-16 sm:w-20 rounded-full "
+                  className=" w-16 md:w-20 rounded-full "
                 />
                 {trailer?.length > 0 && (
                   <section
@@ -148,28 +143,28 @@ function MovieDetails({
                       setShowVideo(true);
                       setVideoId(trailer[0]?.key);
                     }}>
-                    <FaRegPlayCircle className="text-6xl sm:text-[5rem]  " />
+                    <FaRegPlayCircle className="text-6xl md:text-[5rem]  " />
                     <span className="text-xl">Watch Trailer</span>
                   </section>
                 )}
               </section>
               <section>
-                <h2 className="text-2xl font-semibold sm:text-3xl">OverView</h2>
+                <h2 className="text-2xl font-semibold md:text-3xl">OverView</h2>
                 <p className="mt-2">{data.overview}</p>
               </section>
               <section className="mt-8">
-                <section className="flex justify-between sm:justify-start gap-3">
-                  <article className="sm:flex gap-2 items-center">
+                <section className="flex justify-between  gap-3">
+                  <article >
                     <p className="heading">Status:</p>
                     <p className="result">{data.status}</p>
                   </article>
-                  <article className="sm:flex gap-2 items-center ">
+                  <article >
                     <p className="heading">Release Date:</p>
                     <p className="result">
                       {formatDateString(data.release_date)}
                     </p>
                   </article>
-                  <article className="sm:flex gap-2 items-center">
+                  <article >
                     <p className="heading">Runtime:</p>
                     <p className="result">
                       {convertToHoursAndMinutes(data.runtime) || "N/A"}
@@ -189,20 +184,20 @@ function MovieDetails({
                   </article>
                   <hr className=" h-0.5 w-full my-4" />
                 </section>
-                <section className="flex justify-between sm:justify-start  gap-3">
-                  <article className="sm:flex gap-2 items-center">
+                <section className="flex justify-between gap-3">
+                  <article >
                     <p className="heading">Budget:</p>
                     <p className="result">
                       ${data.budget.toLocaleString() || "N/A"}
                     </p>
                   </article>
-                  <article className="sm:flex gap-2 items-center ">
+                  <article >
                     <p className="heading">Revenue:</p>
                     <p className="result">
                       ${data.revenue.toLocaleString() || "N/A"}
                     </p>
                   </article>
-                  <article className="sm:flex gap-2 items-center ">
+                  <article >
                     <p className="heading">Profit:</p>
                     <p className="result">
                       ${(data.revenue - data.budget).toLocaleString() || "N/A"}

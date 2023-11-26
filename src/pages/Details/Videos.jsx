@@ -55,7 +55,7 @@ function Videos({ videos, videosLoading: loading, setShowVideo, setVideoId }) {
                     setVideoId(video?.key);
                   }}
                   key={video.id}
-                  className="w-40 sm:w-60 cursor-pointer relative hover:text-pink transition-all duration-500">
+                  className="w-40 md:w-60 cursor-pointer relative hover:text-pink hover:opacity-70 transition-all duration-500">
                   <LazyLoadImage
                     threshold={250}
                     src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
